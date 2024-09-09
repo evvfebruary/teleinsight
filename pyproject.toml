@@ -7,6 +7,18 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+telethon = "^1.36.0"
+logger = "^1.4"
+loguru = "^0.7.2"
+ujson = "^5.10.0"
+transformers = "^4.44.2"
+ruff = "^0.6.4"
+boto3 = "^1.35.14"
+python-dotenv = "^1.0.1"
+clickhouse-sqlalchemy = "^0.3.2"
+clickhouse-connect = "^0.7.19"
+dbt-core = "^1.8.6"
+dbt-clickhouse = "^1.8.3"
 
 
 [build-system]
