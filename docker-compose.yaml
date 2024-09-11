@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  teleinsight:
+    build: .
+    container_name: telegram-bot
+    env_file:
+      - .env
