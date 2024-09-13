@@ -20,3 +20,4 @@ def upload_to_s3(file_path, bucket_name, prefix):
     # Upload the file
     s3.upload_file(file_path, bucket_name, object_key)
     logger.info(f"File {file_path} uploaded to {bucket_name}/{object_key}")
+    return object_key
