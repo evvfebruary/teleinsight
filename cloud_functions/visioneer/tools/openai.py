@@ -56,6 +56,6 @@ def get_image_description(base64_image):
         "https://api.openai.com/v1/chat/completions",
         headers=create_headers(),
         json=create_payload(base64_image),
-        proxies=get_proxies,
+        proxies=get_proxies(),
     )
     return response.json()

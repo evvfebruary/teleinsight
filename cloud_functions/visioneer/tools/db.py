@@ -1,6 +1,4 @@
-import os
 import clickhouse_connect
-from loguru import logger
 from .config import CH_HOST, CH_PORT, CH_USERNAME, CH_PASSWORD, CH_DATABASE
 
 
