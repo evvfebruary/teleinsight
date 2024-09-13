@@ -1,17 +1,14 @@
-import os
-
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 from loguru import logger
 
-from config import SESSION_STRING, API_ID, API_HASH, NEW_MESSAGE_INGESTOR_TAG
-from dotenv import load_dotenv
+from config import SESSION_STRING, API_ID, API_HASH, LOCAL_PATH_TO_SAVE_IMAGE
 
 import ujson
 from ingestor.db.handler import insert_event
-from ingestor.storage.objects import upload_to_s3
-
-load_dotenv()
+from config import NEW_MESSAGE_INGESTOR_TAG
+from ingestor.utils.events import get_peer_id, handle_photo_attachments
+from utils.meta import create_meta_tags
 
 client = TelegramClient(
     StringSession(SESSION_STRING),
@@ -20,36 +17,37 @@ client = TelegramClient(
 )
 
 
-def create_meta_tags():
-    meta_tags = {"__service_tag": NEW_MESSAGE_INGESTOR_TAG}
-    return meta_tags
-
-
 @client.on(events.NewMessage)
 async def handler(event):
-    logger.info("# Receive new event")
-    sender_info = await event.get_sender()
+    try:
+        logger.info("# Receive new event")
+        sender_info = await event.get_sender()
 
-    # Enrich with meta tags
-    json_message_with_meta = {
-        "event": event.to_json(),
-        "sender": sender_info.to_json(),
-        "x_meta": create_meta_tags(),
-    }
+        # Enrich with meta tags
+        json_message_with_meta = {
+            "event": event.to_json(),
+            "sender": sender_info.to_json(),
+            "x_meta": create_meta_tags(NEW_MESSAGE_INGESTOR_TAG),
+        }
 
-    logger.info(f"# Get attributes of new message: {json_message_with_meta}")
+        # Get peer id
+        peer_id = get_peer_id(event.message.to_dict())
 
-    if event.message.photo:
-        logger.info("# Message have attachment")
-        file_path = await client.download_media(
-            event.message.media, "./attachments/images/"
-        )
-        logger.info(f"File path {file_path}")
-        upload_to_s3(file_path, bucket_name="teleinsight", prefix="attachments/images")
-        json_message_with_meta["photo_attachment_path"] = file_path
-        os.remove(file_path)
+        if event.message.photo:
+            s3_object_key = await handle_photo_attachments(
+                tg_client=client,
+                tg_event=event,
+                local_path_to_save_img=LOCAL_PATH_TO_SAVE_IMAGE,
+                peer_id=peer_id,
+            )
 
-    insert_event(ujson.dumps(json_message_with_meta))
+            # Add s3 prefix as another field
+            json_message_with_meta["photo_attachment_path"] = s3_object_key
+
+        # Save json to clickhouse
+        insert_event(ujson.dumps(json_message_with_meta))
+    except Exception as e:
+        logger.error(e)
 
 
 def entrypoint(tg_client):
