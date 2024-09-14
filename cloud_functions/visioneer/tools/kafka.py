@@ -5,7 +5,7 @@ from .config import KAFKA_PASSWORD, KAFKA_USER, KAFKA_PORT, KAFKA_HOST
 params = {
     'bootstrap.servers': f'{KAFKA_HOST}:{KAFKA_PORT}',
     'security.protocol': 'SASL_SSL',
-    'ssl.ca.location': './toools/certificates/YandexInternalRootCA.crt',
+    'ssl.ca.location': './tools/certificates/YandexInternalRootCA.crt',
     'sasl.mechanism': 'SCRAM-SHA-512',
     'sasl.username': KAFKA_USER,
     'sasl.password': KAFKA_PASSWORD,
