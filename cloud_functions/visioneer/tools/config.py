@@ -19,3 +19,8 @@ OPEN_AI_API_KEY = os.getenv("openai_key")
 # Prompt to ask model to describe image
 VISION_PROMPT = "What’s in this image?"
 DETAIL_QUALITY = "low"
+
+# Kafka
+KAFKA_USER = os.getenv("KAFKA_USER")
+KAFKA_PASSWORD = os.getenv("KAFKA_PASSWORD")
+KAFKA_TOPIC = os.getenv("KAFKA_TOPIC")
