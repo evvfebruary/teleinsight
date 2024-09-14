@@ -1,6 +1,6 @@
 boto3==1.35.14
 requests==2.32.3
 loguru==0.7.2
-clickhouse-clickhouse-connect==0.7.19
+clickhouse-connect==0.7.19
 ujson==5.10.0
 confluent-kafka==2.5.3

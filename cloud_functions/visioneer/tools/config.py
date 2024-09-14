@@ -22,5 +22,7 @@ DETAIL_QUALITY = "low"
 
 # Kafka
 KAFKA_USER = os.getenv("KAFKA_USER")
+KAFKA_HOST = os.getenv("KAFKA_HOST")
+KAFKA_PORT = os.getenv("KAFKA_PORT")
 KAFKA_PASSWORD = os.getenv("KAFKA_PASSWORD")
 KAFKA_TOPIC = os.getenv("KAFKA_TOPIC")
