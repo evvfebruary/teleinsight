@@ -1,7 +1,7 @@
 KAFKA_HOST = "rc1a-k33qdb97nnq4iubp.mdb.yandexcloud.net"
 KAFKA_PORT = 9091
 CONSUMER_GROUP = "teleinsight-new-images-getters"
-CLIP_MODEL_NAME = "clip-vit-base-patch32"
+CLIP_MODEL_NAME = "openai/clip-vit-base-patch32"
 TOPIC_WITH_NEW_ATTACHMENTS = "freshly_created_attachments"
 
 

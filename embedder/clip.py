@@ -9,8 +9,8 @@ dotenv.load_dotenv("../ingestor/.env")
 
 
 def get_model_and_processor():
-    model = CLIPModel.from_pretrained(CLIP_MODEL_NAME, local_files_only=True)
-    processor = CLIPProcessor.from_pretrained(CLIP_MODEL_NAME, local_files_only=True)
+    model = CLIPModel.from_pretrained(CLIP_MODEL_NAME)
+    processor = CLIPProcessor.from_pretrained(CLIP_MODEL_NAME)
     return model, processor
 
 

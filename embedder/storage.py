@@ -1,5 +1,4 @@
 import boto3
-from loguru import logger
 
 
 def read_image_from_s3(bucket_name, object_key):
