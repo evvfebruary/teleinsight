@@ -2,7 +2,7 @@ from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 from loguru import logger
 
-from config import SESSION_STRING, API_ID, API_HASH, LOCAL_PATH_TO_SAVE_IMAGE
+from ingestor.config import SESSION_STRING, API_ID, API_HASH, LOCAL_PATH_TO_SAVE_IMAGE
 
 import ujson
 from ingestor.db.handler import insert_event
@@ -25,8 +25,8 @@ async def handler(event):
 
         # Enrich with meta tags
         json_message_with_meta = {
-            "event": event.to_json(),
-            "sender": sender_info.to_json(),
+            "event": ujson.loads(event.to_json()),
+            "sender": ujson.loads(sender_info.to_json()),
             "x_meta": create_meta_tags(NEW_MESSAGE_INGESTOR_TAG),
         }
 
@@ -36,7 +36,7 @@ async def handler(event):
         if event.message.photo:
             s3_object_key = await handle_photo_attachments(
                 tg_client=client,
-                tg_event=event,
+                message_media=event.message.media,
                 local_path_to_save_img=LOCAL_PATH_TO_SAVE_IMAGE,
                 peer_id=peer_id,
             )
