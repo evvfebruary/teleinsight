@@ -1,3 +1,5 @@
+import os.path
+
 from quixstreams import Application
 from loguru import logger
 
@@ -15,13 +17,16 @@ from functools import partial
 
 from quixstreams.kafka.configuration import ConnectionConfig
 
+
 connection = ConnectionConfig(
     bootstrap_servers=f"{KAFKA_HOST}:{KAFKA_PORT}",
     security_protocol="SASL_SSL",
     sasl_mechanism="SCRAM-SHA-512",
     sasl_username="admin",
     sasl_password="evvbmstu",
-    ssl_ca_location="./certificates/YandexInternalRootCA.crt",
+    ssl_ca_location=os.path.join(
+        os.path.dirname(__file__), "certificates/YandexInternalRootCA.crt"
+    ),
 )
 
 
@@ -41,12 +46,13 @@ def create_embeddings(row, model, processor):
 
 
 def listen_and_push_embeddings():
+    logger.info("# Strart create application ")
     app = Application(
         broker_address=connection,
         consumer_group=CONSUMER_GROUP,
         auto_create_topics=False,
     )
-
+    logger.info("# Collect needed model")
     model, processor = get_model_and_processor()
 
     # Describe topics
