@@ -7,12 +7,16 @@ services:
       dockerfile: Dockerfile.ingestor
     volumes:
       - ./ingestor:/app/ingestor
-    command: python ingestor/main.py
+    env_file:
+      - ./ingestor/.env
+    command: python ingestor/new_messages_handler.py
 
   embedder:
     build:
       context: .
       dockerfile: Dockerfile.embedder
+    env_file:
+      - ./ingestor/.env
     volumes:
       - ./embedder:/app/embedder
     command: python embedder/main.py

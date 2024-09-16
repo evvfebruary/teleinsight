@@ -1,0 +1,15 @@
+# .dockerignore
+
+# Ignore ingestor attachments and batches
+ingestor/attachments
+ingestor/batches
+
+# Ignore embedder state
+embedder/state
+
+# Ignore pycache directories
+**/__pycache__
+
+# Ignore drafts directory
+drafts
+.venv
