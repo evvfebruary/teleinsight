@@ -1,5 +1,5 @@
 import clickhouse_connect
-from config import CH_HOST, CH_PORT, CH_USERNAME, CH_PASSWORD, CH_TELEINSIGHT_DATABASE
+from ..config import CH_HOST, CH_PORT, CH_USERNAME, CH_PASSWORD, CH_TELEINSIGHT_DATABASE
 
 # Create the ClickHouse client
 client = clickhouse_connect.get_client(
