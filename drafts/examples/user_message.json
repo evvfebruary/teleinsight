@@ -1,0 +1,213 @@
+{
+  "event": {
+    "_": "Message",
+    "id": 1542463,
+    "peer_id": {
+      "_": "PeerUser",
+      "user_id": 7172639410
+    },
+    "date": "2024-09-15T11:22:35+00:00",
+    "message": "",
+    "out": false,
+    "mentioned": false,
+    "media_unread": false,
+    "silent": false,
+    "post": false,
+    "from_scheduled": false,
+    "legacy": false,
+    "edit_hide": false,
+    "pinned": false,
+    "noforwards": false,
+    "invert_media": false,
+    "offline": false,
+    "from_id": null,
+    "from_boosts_applied": null,
+    "saved_peer_id": null,
+    "fwd_from": null,
+    "via_bot_id": null,
+    "via_business_bot_id": null,
+    "reply_to": null,
+    "media": {
+      "_": "MessageMediaPhoto",
+      "spoiler": false,
+      "photo": {
+        "_": "Photo",
+        "id": 5420114342776531000,
+        "access_hash": 797530612924674400,
+        "file_reference": "AQAXiT9m5sN7wlIz7FDParC4Yp0RxVJzqA==",
+        "date": "2024-09-15T11:22:35+00:00",
+        "sizes": [
+          {
+            "_": "PhotoStrippedSize",
+            "type": "i",
+            "bytes": "ASgosSHCke1RP/x7H/c/pQxySaZKm9I+RgDJyaQzNO4Mo4B/Cm/Ns6jr7VYu1UygjgAc4FQJEXTCBm57LmgOo1t2W+b9aKdJGULbgy59RiimI1x1xTZgixuf4iuOlJK4SJmJ6Cq7O7BjyQcCkhsnijWSAshO9fun0OKdFqkPlqGjlj7YTGPwplmdu8fSoW098nDLjPvTegia71SKW3eNUd9wx84GB+VFVDYz4wBn/gQopXHYuTIXjAHJB6etQcqjAg5zzRRQhD7fgt/u1Yd5A/ABB6c0UUS3GgEp/ijP4UUUVIw="
+          },
+          {
+            "_": "PhotoSize",
+            "type": "m",
+            "w": 320,
+            "h": 320,
+            "size": 35631
+          },
+          {
+            "_": "PhotoSizeProgressive",
+            "type": "x",
+            "w": 640,
+            "h": 640,
+            "sizes": [
+              6033,
+              17253,
+              28002,
+              45513,
+              81986
+            ]
+          }
+        ],
+        "dc_id": 2,
+        "has_stickers": false,
+        "video_sizes": []
+      },
+      "ttl_seconds": null
+    },
+    "reply_markup": null,
+    "entities": [],
+    "views": null,
+    "forwards": null,
+    "replies": null,
+    "edit_date": null,
+    "post_author": null,
+    "grouped_id": null,
+    "reactions": null,
+    "restriction_reason": [],
+    "ttl_period": null,
+    "quick_reply_shortcut_id": null,
+    "effect": null,
+    "factcheck": null
+  },
+  "sender": {
+    "_": "User",
+    "id": 7172639410,
+    "is_self": false,
+    "contact": false,
+    "mutual_contact": false,
+    "deleted": false,
+    "bot": false,
+    "bot_chat_history": false,
+    "bot_nochats": false,
+    "verified": false,
+    "restricted": false,
+    "min": false,
+    "bot_inline_geo": false,
+    "support": false,
+    "scam": false,
+    "apply_min_photo": true,
+    "fake": false,
+    "bot_attach_menu": false,
+    "premium": false,
+    "attach_menu_enabled": false,
+    "bot_can_edit": false,
+    "close_friend": false,
+    "stories_hidden": false,
+    "stories_unavailable": true,
+    "contact_require_premium": false,
+    "bot_business": false,
+    "access_hash": 7992826579638697000,
+    "first_name": "Р88-📠Владимир",
+    "last_name": null,
+    "username": "r88_vladimir",
+    "phone": "79152942322",
+    "photo": {
+      "_": "UserProfilePhoto",
+      "photo_id": 5366293669503689000,
+      "dc_id": 2,
+      "has_video": true,
+      "personal": false,
+      "stripped_thumb": "AQgIplYBbnOTJng/0oooqRE="
+    },
+    "status": {
+      "_": "UserStatusOnline",
+      "expires": "2024-09-15T11:27:25+00:00"
+    },
+    "bot_info_version": null,
+    "restriction_reason": [],
+    "bot_inline_placeholder": null,
+    "lang_code": null,
+    "emoji_status": null,
+    "usernames": [],
+    "stories_max_id": null,
+    "color": null,
+    "profile_color": null
+  },
+  "x_meta": {
+    "__service_tag": "online-ingestor"
+  },
+  "photo_attachment_path": "attachments/7172639410/photo/photo_2024-09-15_14-22-35.jpg"
+}
+
+
+// SENDER
+{
+  "_": "User",
+  "id": 282444445,
+  "is_self": true,
+  "contact": true,
+  "mutual_contact": true,
+  "deleted": false,
+  "bot": false,
+  "bot_chat_history": false,
+  "bot_nochats": false,
+  "verified": false,
+  "restricted": false,
+  "min": false,
+  "bot_inline_geo": false,
+  "support": false,
+  "scam": false,
+  "apply_min_photo": true,
+  "fake": false,
+  "bot_attach_menu": false,
+  "premium": true,
+  "attach_menu_enabled": false,
+  "bot_can_edit": false,
+  "close_friend": false,
+  "stories_hidden": false,
+  "stories_unavailable": true,
+  "contact_require_premium": false,
+  "bot_business": false,
+  "access_hash": -4469613476702670300,
+  "first_name": "Vladimir",
+  "last_name": "Elfimov",
+  "username": null,
+  "phone": "79851301115",
+  "photo": {
+    "_": "UserProfilePhoto",
+    "photo_id": 1213089654668109800,
+    "dc_id": 2,
+    "has_video": true,
+    "personal": false,
+    "stripped_thumb": "AQgIcIVaQgxELjA4FFFFAz8="
+  },
+  "status": {
+    "_": "UserStatusOffline",
+    "was_online": "2024-09-10T15:34:10+00:00"
+  },
+  "bot_info_version": null,
+  "restriction_reason": [],
+  "bot_inline_placeholder": null,
+  "lang_code": null,
+  "emoji_status": null,
+  "usernames": [
+    {
+      "_": "Username",
+      "username": "evvbmstu",
+      "editable": false,
+      "active": true
+    }
+  ],
+  "stories_max_id": null,
+  "color": {
+    "_": "PeerColor",
+    "color": 0,
+    "background_emoji_id": 5307761966406710000
+  },
+  "profile_color": null
+}
