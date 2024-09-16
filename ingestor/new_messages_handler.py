@@ -1,3 +1,5 @@
+import os.path
+
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 from loguru import logger
@@ -15,6 +17,11 @@ client = TelegramClient(
     int(API_ID),
     API_HASH,
 )
+
+LOCAL_PATH_TO_SAVE_IMAGE = os.path.join(
+    os.path.dirname(__file__), LOCAL_PATH_TO_SAVE_IMAGE
+)
+os.makedirs(LOCAL_PATH_TO_SAVE_IMAGE, exist_ok=True)
 
 
 @client.on(events.NewMessage)
