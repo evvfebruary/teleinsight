@@ -6,7 +6,7 @@ from tools.config import KAFKA_TOPIC
 from tools.kafka import push_message_to_topic
 from tools.db import get_ch_client
 from tools.db import insert_image_description
-from tools.openai import get_image_description
+from tools.openai import get_image_description, get_description_embedding
 from tools.storage import read_image_from_s3
 
 
@@ -18,6 +18,15 @@ def get_bucket_and_object_key(event):
 def encode_image(image_data):
     base64_image = base64.b64encode(image_data).decode("utf-8")
     return base64_image
+
+
+def get_only_description(response):
+    try:
+        content = response['choices'][0]['message']['content']
+    except Exception as e:
+        content = ''
+    return content
+
 
 
 def handler(event, context):
@@ -33,12 +42,22 @@ def handler(event, context):
     base64_image = encode_image(image_data)
 
     logger.info(f"# Call for description to OpenAI itself")
-    description = get_image_description(base64_image)
+    response = get_image_description(base64_image)
+
+    logger.info("# Extract description")
+    description = get_only_description(response)
+    logger.info("# Call for embeddings")
+    description_embeddings = get_description_embedding(description)
 
     logger.info(f"# Insert data about {bucket_name}/{object_key} to Clickhouse")
     ch_client = get_ch_client()
     insert_image_description(
-        ch_client, bucket_name, object_key, ujson.dumps(description)
+        ch_client,
+        bucket_name,
+        object_key,
+        ujson.dumps(response),
+        description=description,
+        embeddings=description_embeddings
     )
 
     return True
