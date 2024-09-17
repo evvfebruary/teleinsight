@@ -15,11 +15,10 @@ def get_ch_client():
 
     return client
 
-
-def insert_image_description(client, bucket_name, object_key, image_description):
+def insert_image_description(client, bucket_name, object_key, open_ai_response, description, embeddings):
     client.insert(
         "image_description_dt",
-        [[bucket_name, object_key, image_description]],
-        column_names=["bucket_name", "object_key", "description"],
+        [[bucket_name, object_key, open_ai_response, description, embeddings ]],
+        column_names=["bucket_name", "object_key", "description", "extracted_description", "embeddings"],
         settings={"async_insert": 1, "wait_for_async_insert": 1},
     )
