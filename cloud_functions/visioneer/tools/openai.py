@@ -6,6 +6,7 @@ from .config import (
     HTTPS_PROXY,
 )
 import requests
+from langchain_openai import OpenAIEmbeddings
 
 
 def create_headers():
@@ -59,3 +60,13 @@ def get_image_description(base64_image):
         proxies=get_proxies(),
     )
     return response.json()
+
+
+def get_description_embedding(description):
+    embeddings_model = OpenAIEmbeddings(
+        model='text-embedding-3-small',
+        openai_proxy=HTTPS_PROXY,
+        api_key=OPEN_AI_API_KEY
+    )
+    description_embedding = embeddings_model.embed_query(description)
+    return description_embedding
