@@ -4,3 +4,4 @@ loguru==0.7.2
 clickhouse-connect==0.7.19
 ujson==5.10.0
 confluent-kafka==2.5.3
+langchain-openai==0.2.0
