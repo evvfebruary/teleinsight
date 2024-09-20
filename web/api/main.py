@@ -62,6 +62,7 @@ mock_image_data = (
 
 origins = [
     "http://localhost",
+    "http://localhost:63343",
     "http://localhost:63342",
     "http://127.0.0.1:8000"
 ]
@@ -104,14 +105,14 @@ def encode_image(image_data):
 @app.post("/api")
 async def receive_data(text: str = Form(None), file: UploadFile = File(None)):
     logger.info(f"# Received text: {text}")
-    most_closest_count = 1
+    most_closest_count = 10
     ch_client = get_ch_client()
     response_data = []
     if text is not None:
         text_embedding = get_text_embedding(text)
         logger.info(text_embedding)
-        most_closest_df = ch_client.query_df(f"""SELECT DISTINCT object_key,extracted_description,L2Distance({text_embedding}, embeddings) as score FROM teleinsight.image_description_dt ORDER BY score ASC LIMIT {most_closest_count};""")
-
+        most_closest_df = ch_client.query_df(f"""SELECT DISTINCT object_key,extracted_description, embeddings, L2Distance({text_embedding}, embeddings) as score FROM teleinsight.image_description_dt ORDER BY score ASC LIMIT {most_closest_count};""")
+        most_closest_df.drop_duplicates(subset=['embeddings'], keep='first', inplace=True)
         for each in most_closest_df[['object_key', 'extracted_description', 'score']].to_dict("records"):
             response_data.append(
                 {'image_data': encode_image(read_image_from_s3('teleinsight',each['object_key'])), "text_description": [f"{each['extracted_description']}\nScore: {each['score']}"]}
@@ -122,7 +123,8 @@ async def receive_data(text: str = Form(None), file: UploadFile = File(None)):
         inputs = preprocess_images(image_bytes, processor)
         image_embedding = get_embeddings(inputs, model).numpy().flatten().tolist()
         logger.info(image_embedding)
-        most_closest_df = ch_client.query_df(f""" SELECT object_key, score, L2Distance({image_embedding}, embeddings) as score FROM teleinsight.image_description_dt ORDER BY score ASC LIMIT {most_closest_count};""")
+        most_closest_df = ch_client.query_df(f""" SELECT object_key, score, embeddings, L2Distance({image_embedding}, embeddings) as score FROM teleinsight.image_embeddings_dt WHERE embeddings != [] ORDER BY score ASC LIMIT {most_closest_count};""")
+        most_closest_df.drop_duplicates(subset=['embeddings'], keep='first', inplace=True)
         for each in most_closest_df[['object_key', 'score']].to_dict("records"):
             response_data.append(
                 {'image_data': encode_image(read_image_from_s3('teleinsight',each['object_key'])), "text_description": [f"Score: {each['score']}"]}
