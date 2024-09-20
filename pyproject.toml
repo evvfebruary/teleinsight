@@ -20,6 +20,7 @@ clickhouse-connect = "^0.7.19"
 dbt-core = "^1.8.6"
 dbt-clickhouse = "^1.8.3"
 quixstreams = "^2.10.0"
+langchain-openai = "^0.2.0"
 
 
 [build-system]
